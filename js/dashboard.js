@@ -26,6 +26,7 @@ var currentContractExpiryDate = '';
 
 $(function() {
 	$("#headerDate").html(moment().format("dddd, D MMMM YYYY"));
+	$(".lastReportingMonth").html(moment().format("MMMM"))
 
 	if (sessionStorage.loggedIn === 'true') {
 		// Change the displayed section based on the url hash
@@ -48,8 +49,8 @@ $(function() {
 			hashchange: function() {
 				switch(window.location.hash.substr(1)) {
 					case '':
-					case 'welcome':
-						welcome();
+					case 'dashboard':
+						dashboard();
 						break;
 					case 'my-profile':
 						profile();
@@ -166,8 +167,8 @@ $(function() {
 		} else {
 			// Restrict the access of a user with a proposal account status
 			if (sessionStorage.status === 'proposal') {
-				$("#welcome .nonProposalUser").hide();
-				$("#welcome .proposalUser").show();
+				$("#dashboard .nonProposalUser").hide();
+				$("#dashboard .proposalUser").show();
 				$("nav .properties, nav .documents, nav .directBooking").hide();
 			}
 		}
@@ -303,7 +304,7 @@ function changeUser(userInfo) {
 	sessionStorage.lastLoginIP = userInfo.lastLoginIP;
 
 	// If the admin is on a property subpage, change the hash to my-properties before reloading the page.
-	if (['', 'welcome', 'my-profile', 'my-properties', 'documents', 'direct-booking', 'change-password', 'admin'].indexOf(window.location.hash.substr(1)) === -1) {
+	if (['', 'dashboard', 'my-profile', 'my-properties', 'documents', 'direct-booking', 'change-password', 'admin'].indexOf(window.location.hash.substr(1)) === -1) {
 		window.location.hash = 'my-properties';
 	}
 
@@ -335,7 +336,7 @@ function logout() {
 
 // Hide all the section containers
 function hideAllContainers() {
-	$("div#welcome").hide();
+	$("div#dashboard").hide();
 	$("div#profile").hide();
 	$("div#properties").hide();
 	$("div#documents").hide();
@@ -347,13 +348,12 @@ function hideAllContainers() {
 	$("#footer #calendarIconLink").hide();
 }
 
-// Show welcome container, set title, and active nav item and add last login time to bottom of page
-function welcome() {
+// Show dashboard container, set title, and active nav item and add last login time to bottom of page
+function dashboard() {
 	hideAllContainers();
 	$("nav .active").removeClass("active");
-	$("nav .welcome").addClass("active");
-	$("#welcomeLastLogin").text(sessionStorage.lastLogin !== '' ? "[Last login: " + moment(sessionStorage.lastLogin).format("ddd Do MMM YYYY h:mm a") + "]" : "");
-	$("div#welcome").show();
+	$("nav .dashboard").addClass("active");
+	$("div#dashboard").show();
 }
 
 // Show profile container, set title, and active nav item and populate the input fields
