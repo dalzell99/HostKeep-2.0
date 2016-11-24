@@ -1,0 +1,287 @@
+.hidden {
+  display: none;
+}
+
+[class^='col-'] {
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+input[type='checkbox'] {
+  width: initial;
+  margin-left: 10px;
+}
+
+button {
+  background-color: #00b7a6;
+  padding: 5px 40px;
+  border: 0;
+  font-weight: bold;
+  color: white;
+}
+
+input,
+select,
+textarea {
+  margin: 2px;
+  border: 1px solid #00b7a6;
+  width: 100%;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: #EBEBE4;
+}
+
+td {
+  padding: 0 5px;
+}
+
+p {
+  margin: 20px 0;
+}
+
+label {
+  font-weight: initial;
+  margin-bottom: initial;
+}
+
+header > #headerInfoPanel {
+  background-color: #e5e5e5;
+  color: #919395;
+  height: 6rem;
+}
+
+header > #headerInfoPanel #headerLogoContainer,
+header > #headerInfoPanel #headerDropdownContainer,
+header > #headerInfoPanel #headerUserInfoContainer {
+  height: 6rem;
+  width: 100%;
+}
+
+header > #headerInfoPanel #headerUserInfoContainer {
+  text-align: center;
+}
+
+header > #headerInfoPanel #headerLogo {
+  max-height: 5rem;
+  max-width: 100%;
+}
+
+header > #headerInfoPanel #headerTitle {
+  color: #686868;
+  font-size: 1rem;
+}
+
+header > #headerInfoPanel #headerUserProfileImage {
+  border-radius: 50%;
+  width: 4rem;
+}
+
+header > #headerInfoPanel #headerUsersName {
+  display: inline-block;
+  border-right: 1px solid black;
+  padding: 0 .75rem;
+  font-size: 1rem;
+  height: 1.8rem;
+}
+
+header > #headerInfoPanel #headerLogoutButton {
+  margin: 0 .75rem;
+  padding: .3rem 1.9rem;
+}
+
+header > #headerInfoPanel select {
+  color: initial;
+  margin-top: 5px;
+  padding: 5px;
+  width: 85%;
+}
+
+#dashboard main {
+  height: calc(100vh - 6rem);
+}
+
+#dashboard main content {
+  height: 100%;
+  overflow: auto;
+}
+
+#dashboard main content > div {
+  padding: 2rem;
+}
+
+#dashboard main content > div .sectionHeader {
+  width: 100%;
+  text-align: center;
+}
+
+#dashboard main content > div .sectionHeader img {
+  border-radius: 50%;
+}
+
+#dashboard main content > div .sectionHeader td:not(:last-of-type) {
+  width: 8rem;
+}
+
+#dashboard main content > div .sectionHeader td:last-of-type {
+  text-align: right;
+}
+
+#dashboard main content > div .sectionHeader td:last-of-type select {
+  width: 9rem;
+}
+
+#dashboard main content > div #dashboard .dashboardNewsUpdates,
+#dashboard main content > div #dashboard .dashboardReporting {
+  height: 8rem;
+  border: 1px solid black;
+  margin: .75rem;
+  overflow: auto;
+}
+
+#dashboard main content > div #dashboard .downloadContainer {
+  text-align: center;
+}
+
+#dashboard main content > div #dashboard .downloadContainer img {
+  width: 30%;
+  display: block;
+  margin-left: 35%;
+  margin-bottom: 1rem;
+}
+
+#dashboard main content > div #dashboard .downloadContainer button {
+  background-color: transparent;
+  padding: 0;
+  color: #00b7a6;
+}
+
+#dashboard main content > div #properties .propertyOverview {
+  width: 100%;
+  font-size: 1rem;
+}
+
+#dashboard main content > div #properties .propertyOverview .propertyMap {
+  width: 3rem;
+}
+
+#dashboard main content > div #properties .propertyOverview .propertySubpage {
+  width: 2rem;
+}
+
+#dashboard main content > div #properties .propertyOverview .addressFirst {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+#dashboard main nav {
+  box-shadow: 3px 0 30px 0 #e5e5e5;
+  height: 100%;
+}
+
+#dashboard main nav:hover {
+  cursor: pointer;
+}
+
+#dashboard main nav table {
+  width: 100%;
+}
+
+#dashboard main nav table td {
+  width: 20%;
+  padding: 0;
+}
+
+#dashboard main nav table td div {
+  margin: 3%;
+  height: 4em;
+  text-align: center;
+  padding-top: 1.3em;
+  font-size: 1.1em;
+  font-weight: bold;
+  /* Stop text selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (max-width: 1200px) {
+  #dashboard main nav table td div {
+    font-size: .85em;
+  }
+}
+
+@media (max-width: 768px) {
+  #dashboard main nav table td div {
+    font-size: .65em;
+  }
+}
+
+#dashboard main nav table td div:hover {
+  background-color: white;
+}
+
+#dashboard main nav table td div.active {
+  background-color: #00b7a6;
+  color: #fff;
+}
+
+#dashboard main nav table td .admin {
+  display: none;
+}
+
+@media (max-width: 489px) {
+  #dashboard main nav table td:nth-child(5) > div {
+    padding-top: .7em;
+  }
+}
+
+#dashboard main nav #sidebarAdmin {
+  text-align: center;
+}
+
+#dashboard main nav #sidebarFooter {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  border-top: 1px solid #c3c3c3;
+}
+
+#dashboard main nav #sidebarFooter #copyright {
+  text-align: center;
+  height: 2rem;
+  font-size: .9rem;
+}
+
+#dashboard main nav #sidebarFooter .footerLink {
+  text-align: center;
+  border-right: 1px solid #e5e5e5;
+  height: 1.9rem;
+}
+
+#dashboard main nav #sidebarFooter .footerLink:last-of-type {
+  border-right: 0;
+}
+
+.fa {
+  display: none;
+}
+
+.fa.fa-check {
+  color: #0F0;
+}
+
+.fa.fa-times {
+  color: #F00;
+}
+
+.fa.fa-15x {
+  font-size: 1.5em;
+}

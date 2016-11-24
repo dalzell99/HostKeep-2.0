@@ -44,25 +44,27 @@ $(function() {
 // Set sessionStorage variables
 function setUserInfo(response, index) {
 	var userInfo = JSON.parse(response.substr(index));
-	sessionStorage.loggedIn = 'true';
-	sessionStorage.customerID = userInfo['customerID'];
-	sessionStorage.username = userInfo['username'];
-	sessionStorage.salutation = userInfo['salutation'];
-	sessionStorage.firstName = userInfo['firstName'];
-	sessionStorage.lastName = userInfo['lastName'];
-	sessionStorage.company = userInfo['company'];
-	sessionStorage.phoneNumber = userInfo['phoneNumber'];
-	sessionStorage.mobileNumber = userInfo['mobileNumber'];
-	sessionStorage.bankName = userInfo['bankName'];
-	sessionStorage.bsb = userInfo['bsb'];
-	sessionStorage.accountNumber = userInfo['accountNumber'];
-	sessionStorage.postalAddress = userInfo['postalAddress'];
-	sessionStorage.suburb = userInfo['suburb'];
-	sessionStorage.state = userInfo['state'];
-	sessionStorage.postcode = userInfo['postcode'];
-	sessionStorage.country = userInfo['country'];
-	sessionStorage.lastModified = userInfo['lastModified'];
-	sessionStorage.lastLogin = userInfo['lastLogin'];
-	sessionStorage.lastLoginIP = userInfo['lastLoginIP'];
-	sessionStorage.status = userInfo['status'];
+	setSessionVars({
+		loggedIn: 'true',
+		customerID: userInfo.customerID,
+		username: userInfo.username,
+		salutation: userInfo.salutation,
+		firstName: userInfo.firstName,
+		lastName: userInfo.lastName,
+		company: userInfo.company,
+		phoneNumber: userInfo.phoneNumber,
+		mobileNumber: userInfo.mobileNumber,
+		bankName: userInfo.bankName,
+		bsb: userInfo.bsb,
+		accountNumber: userInfo.accountNumber,
+		postalAddress: userInfo.postalAddress,
+		suburb: userInfo.suburb,
+		state: userInfo.state,
+		postcode: userInfo.postcode,
+		country: userInfo.country,
+		lastModified: userInfo.lastModified,
+		lastLogin: userInfo.lastLogin,
+		lastLoginIP: userInfo.lastLoginIP,
+		status: userInfo.status
+	});
 }

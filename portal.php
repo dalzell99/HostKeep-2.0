@@ -6,8 +6,8 @@
 
 		<?php
 		include('head.php');
-		// echo '<link href="css/dashboard.css?' . filemtime('css/dashboard.css') . '" rel="stylesheet" />';
-		echo '<script type="text/javascript" src="js/dashboard.js?' . filemtime('js/dashboard.js') . '"></script>';
+		echo '<link href="css/portal.css?' . filemtime('css/portal.css') . '" rel="stylesheet" />';
+		echo '<script type="text/javascript" src="js/portal.js?' . filemtime('js/portal.js') . '"></script>';
 		?>
 	</head>
 	<body id="dashboard">
@@ -29,22 +29,15 @@
 							</tr>
 							<tr>
 								<td>
-									<div class='profile' onclick='window.location = "#my-profile"'>
-										Profile
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class='properties' onclick='window.location = "#my-properties"'>
+									<div class='properties' onclick='window.location = "#properties"'>
 										Properties
 									</div>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<div class='documents' onclick='window.location = "#documents"'>
-										Documents
+									<div class='maintenance' onclick='window.location = "#maintenance"'>
+										Maintenance & repairs
 									</div>
 								</td>
 							</tr>
@@ -57,9 +50,16 @@
 							</tr>
 							<tr>
 								<td>
-									<div class='admin' onclick='window.location = "#admin"'>
-										Admin
+									<div class='documents' onclick='window.location = "#documents"'>
+										Statements
 									</div>
+								</td>
+							</tr>
+						</table>
+						<table id="sidebarAdmin">
+							<tr>
+								<td class='admin' onclick='window.location = "#admin"'>
+									HostKeep admin
 								</td>
 							</tr>
 						</table>
@@ -86,32 +86,24 @@
 						</table>
 					</nav>
 					<content class="col-sm-9">
-						<div id="dashboard">
-							<?php include('dashboard.php'); ?>
-						</div>
-
-						<div id="profile">
-							<?php include('profile.php'); ?>
-						</div>
-
-						<div id="properties">
-							<?php include('properties.php'); ?>
-						</div>
-
-						<div id="documents">
-							<?php include('documents.php'); ?>
-						</div>
-
-						<div id="directBooking">
-							<?php include('direct-booking.php'); ?>
-						</div>
-
-						<div id="password">
-							<?php include('change-password.php'); ?>
-						</div>
-
-						<div id="admin">
-							<?php include('admin.php'); ?>
+						<div class="col-xs-12">
+							<table class="sectionHeader">
+								<tr>
+									<td>
+										<img src="" alt="header image" />
+									</td>
+									<td>
+										<span></span>
+									</td>
+									<td>
+										<button></button>
+									</td>
+									<td>
+										<select></select>
+									</td>
+								</tr>
+							</table>
+							<div class="sectionContent"></div>
 						</div>
 					</content>
 				</main>

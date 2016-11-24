@@ -52,6 +52,9 @@ $(function() {
 					case 'dashboard':
 						dashboard();
 						break;
+					case 'maintenance':
+						maintenance();
+						break;
 					case 'my-profile':
 						profile();
 						break;
@@ -337,6 +340,7 @@ function logout() {
 // Hide all the section containers
 function hideAllContainers() {
 	$("div#dashboard").hide();
+	$("div#maintenance").hide();
 	$("div#profile").hide();
 	$("div#properties").hide();
 	$("div#documents").hide();
@@ -354,6 +358,14 @@ function dashboard() {
 	$("nav .active").removeClass("active");
 	$("nav .dashboard").addClass("active");
 	$("div#dashboard").show();
+}
+
+// Show dashboard container, set title, and active nav item and add last login time to bottom of page
+function maintenance() {
+	hideAllContainers();
+	$("nav .active").removeClass("active");
+	$("nav .maintenance").addClass("active");
+	$("div#maintenance").show();
 }
 
 // Show profile container, set title, and active nav item and populate the input fields
@@ -449,147 +461,152 @@ function profile() {
 
 // Show properties container, set title, and active nav item, dynamically create property table
 function properties() {
+	hideAllContainers();
 	$("nav .active").removeClass("active");
 	$("nav .properties").addClass("active");
-
-	// Create property table
-	var html = '';
-	var htmlMobile = '';
-	userPropertyList.forEach(function(value, index, array) {
-		var imageURL = (value.imageURL === '' ? 'https://placeholdit.imgix.net/~text?txtsize=25&bg=ffffff&txt=No+Image&w=200&h=130&fm=png&txttrack=0' : value.imageURL);
-		html += "<tr>";
-		html += "    <td class='imageURL'><img src='" + imageURL + "' alt='' /></td>";
-		html += "    <td class='propertyID' style='display:none'>" + value.propertyID + "</td>";
-		html += "    <td class='name'>" + value.name + "</td>";
-		html += "    <td class='description'>" + value.description + "</td>";
-		html += "    <td class='address'>" + value.address + "</td>";
-		html += "    <td class='propertyFee'>" + value.propertyFee + "%</td>";
-		html += "    <td class='minimumNightlyPrice'>$" + value.minimumNightlyPrice + "</td>";
-		html += "</tr>";
-
-		htmlMobile += "<tr>";
-		htmlMobile += "    <td class='imageURL'><img src='" + imageURL + "' alt='' /></td>";
-		htmlMobile += "    <td class='propertyID' style='display:none'>" + value.propertyID + "</td>";
-		htmlMobile += "    <td>";
-		htmlMobile += "        <div><span class='name'><strong>" + value.name + "</strong></span>: " + value.description + "</div>";
-		htmlMobile += "        <div>" + value.address + "</div>";
-		htmlMobile += "        <div>Min. nightly price <strong class='minimumNightlyPrice'>$" + value.minimumNightlyPrice + "</strong></div>";
-		htmlMobile += "    </td>";
-		htmlMobile += "</tr>";
-	});
-
-	$("#propertyTable tbody").empty().append(html);
-	$("#propertyMobile tbody").empty().append(htmlMobile);
-
-	// Make table sortable
-	var newTableObject = $("#properties #propertyTable")[0];
-	sorttable.makeSortable(newTableObject);
-
-	addPropertySubpageEvent();
-
-	// Show add property button if user is admin
-	if (sessionStorage.admin !== null && sessionStorage.admin === 'true') {
-		$("#propertiesAdd").show();
-	}
-
-	// Move submit button below DropZone
-	$("#propertiesDropzone").after($("#propertiesAddButton").parent());
-
-	// Toggle add property section
-	$("#propertiesShowAdd").on({
-		click: function () {
-			if ($("#propertiesAddNewProperty").css('display') === 'none') {
-				$("#propertiesAddNewProperty").slideDown();
-				$("#propertiesShowAdd").text("Hide Add New Property");
-			} else {
-				$("#propertiesAddNewProperty").slideUp();
-				$("#propertiesShowAdd").text("Show Add New Property");
-			}
-		}
-	});
-
-	// Add property to the current user
-	$("#propertiesAddButton").on({
-		click: function () {
-			var filename = $("#propertiesAddImageURL").val() !== '' ?
-				$("#propertiesAddImageURL").val() :
-				"http://owners.hostkeep.com.au/images/properties/" + $("#propertiesDropzone").find(".dz-filename:first > *").text();
-
-			var valid = arePropertyInputsValid();
-			if (valid[0]) {
-				$.post("./php/properties/addproperty.php", {
-					username: sessionStorage.username,
-					propertyID: $("#propertiesAddID").val(),
-					name: $("#propertiesAddName").val(),
-					description: $("#propertiesAddDescription").val(),
-					address: $("#propertiesAddAddress").val(),
-					minimumNightlyPrice: $("#propertiesAddPrice").val(),
-					propertyFee: $("#propertiesAddFee").val(),
-					imageURL: filename
-				}, function(response) {
-					if (response.substr(0, 7) === 'success') {
-						displayMessage('info', 'The property has been added to the current customer');
-
-						// Add new property to table
-						var html = '';
-						var a = (sessionStorage.admin === 'true' ? true : false);
-						var imageURL = (filename === '' ? 'https://placeholdit.imgix.net/~text?txtsize=25&bg=ffffff&txt=No+Image&w=200&h=130&fm=png&txttrack=0' : filename);
-						html += "<tr>";
-						html += "    <td class='imageURL'><img src='" + imageURL + "' alt='' /></td>";
-						html += "    <td class='propertyID' style='display:none'>" + $("#propertiesAddID").val() + "</td>";
-						html += "    <td class='name'>" + $("#propertiesAddName").val() + "</td>";
-						html += "    <td class='description'>" + $("#propertiesAddDescription").val() + "</td>";
-						html += "    <td class='address'>" + $("#propertiesAddAddress").val() + "</td>";
-						html += "    <td class='propertyFee'>" + $("#propertiesAddFee").val() + "%</td>";
-						html += "    <td class='minimumNightlyPrice'>$" + $("#propertiesAddPrice").val() + "</td>";
-						html += "</tr>";
-
-						$("#properties tbody").append(html);
-
-						userPropertyList.push({
-							'propertyID': $("#propertiesAddID").val(),
-							'name': $("#propertiesAddName").val(),
-							'description': $("#propertiesAddDescription").val(),
-							'address': $("#propertiesAddAddress").val(),
-							'minimumNightlyPrice': $("#propertiesAddPrice").val(),
-							'propertyFee': $("#propertiesAddFee").val()
-						});
-
-						// Clear inputs
-						$("#propertiesAddID").val('');
-						$("#propertiesAddName").val('');
-						$("#propertiesAddDescription").val('');
-						$("#propertiesAddAddress").val('');
-						$("#propertiesAddPrice").val('');
-						$("#propertiesAddFee").val();
-
-						addPropertySubpageEvent();
-
-						// Remove image from upload box
-						$("#propertiesDropzone > .dz-preview").remove();
-					} else {
-						displayMessage('error', 'Something went wrong added the property to the current user. The web admin has been notified and will fix the problem as soon as possible.');
-					}
-				}).fail(function (request, textStatus, errorThrown) {
-					//displayMessage('error', "Error: Something went wrong with addproperty AJAX POST");
-				});
-			} else {
-				displayMessage("warning", valid[1]);
-			}
-		}
-	});
-
-	hideAllContainers();
-	$("#propertySubpage").hide();
-	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-	if (width <= 600) {
-		$("#propertyMobile").show();
-		$("#propertyTable").hide();
-	} else {
-		$("#propertyMobile").hide();
-		$("#propertyTable").show();
-	}
 	$("div#properties").show();
+	
+	// $("nav .active").removeClass("active");
+	// $("nav .properties").addClass("active");
+	//
+	// // Create property table
+	// var html = '';
+	// var htmlMobile = '';
+	// userPropertyList.forEach(function(value, index, array) {
+	// 	var imageURL = (value.imageURL === '' ? 'https://placeholdit.imgix.net/~text?txtsize=25&bg=ffffff&txt=No+Image&w=200&h=130&fm=png&txttrack=0' : value.imageURL);
+	// 	html += "<tr>";
+	// 	html += "    <td class='imageURL'><img src='" + imageURL + "' alt='' /></td>";
+	// 	html += "    <td class='propertyID' style='display:none'>" + value.propertyID + "</td>";
+	// 	html += "    <td class='name'>" + value.name + "</td>";
+	// 	html += "    <td class='description'>" + value.description + "</td>";
+	// 	html += "    <td class='address'>" + value.address + "</td>";
+	// 	html += "    <td class='propertyFee'>" + value.propertyFee + "%</td>";
+	// 	html += "    <td class='minimumNightlyPrice'>$" + value.minimumNightlyPrice + "</td>";
+	// 	html += "</tr>";
+	//
+	// 	htmlMobile += "<tr>";
+	// 	htmlMobile += "    <td class='imageURL'><img src='" + imageURL + "' alt='' /></td>";
+	// 	htmlMobile += "    <td class='propertyID' style='display:none'>" + value.propertyID + "</td>";
+	// 	htmlMobile += "    <td>";
+	// 	htmlMobile += "        <div><span class='name'><strong>" + value.name + "</strong></span>: " + value.description + "</div>";
+	// 	htmlMobile += "        <div>" + value.address + "</div>";
+	// 	htmlMobile += "        <div>Min. nightly price <strong class='minimumNightlyPrice'>$" + value.minimumNightlyPrice + "</strong></div>";
+	// 	htmlMobile += "    </td>";
+	// 	htmlMobile += "</tr>";
+	// });
+	//
+	// $("#propertyTable tbody").empty().append(html);
+	// $("#propertyMobile tbody").empty().append(htmlMobile);
+	//
+	// // Make table sortable
+	// var newTableObject = $("#properties #propertyTable")[0];
+	// sorttable.makeSortable(newTableObject);
+	//
+	// addPropertySubpageEvent();
+	//
+	// // Show add property button if user is admin
+	// if (sessionStorage.admin !== null && sessionStorage.admin === 'true') {
+	// 	$("#propertiesAdd").show();
+	// }
+	//
+	// // Move submit button below DropZone
+	// $("#propertiesDropzone").after($("#propertiesAddButton").parent());
+	//
+	// // Toggle add property section
+	// $("#propertiesShowAdd").on({
+	// 	click: function () {
+	// 		if ($("#propertiesAddNewProperty").css('display') === 'none') {
+	// 			$("#propertiesAddNewProperty").slideDown();
+	// 			$("#propertiesShowAdd").text("Hide Add New Property");
+	// 		} else {
+	// 			$("#propertiesAddNewProperty").slideUp();
+	// 			$("#propertiesShowAdd").text("Show Add New Property");
+	// 		}
+	// 	}
+	// });
+	//
+	// // Add property to the current user
+	// $("#propertiesAddButton").on({
+	// 	click: function () {
+	// 		var filename = $("#propertiesAddImageURL").val() !== '' ?
+	// 			$("#propertiesAddImageURL").val() :
+	// 			"http://owners.hostkeep.com.au/images/properties/" + $("#propertiesDropzone").find(".dz-filename:first > *").text();
+	//
+	// 		var valid = arePropertyInputsValid();
+	// 		if (valid[0]) {
+	// 			$.post("./php/properties/addproperty.php", {
+	// 				username: sessionStorage.username,
+	// 				propertyID: $("#propertiesAddID").val(),
+	// 				name: $("#propertiesAddName").val(),
+	// 				description: $("#propertiesAddDescription").val(),
+	// 				address: $("#propertiesAddAddress").val(),
+	// 				minimumNightlyPrice: $("#propertiesAddPrice").val(),
+	// 				propertyFee: $("#propertiesAddFee").val(),
+	// 				imageURL: filename
+	// 			}, function(response) {
+	// 				if (response.substr(0, 7) === 'success') {
+	// 					displayMessage('info', 'The property has been added to the current customer');
+	//
+	// 					// Add new property to table
+	// 					var html = '';
+	// 					var a = (sessionStorage.admin === 'true' ? true : false);
+	// 					var imageURL = (filename === '' ? 'https://placeholdit.imgix.net/~text?txtsize=25&bg=ffffff&txt=No+Image&w=200&h=130&fm=png&txttrack=0' : filename);
+	// 					html += "<tr>";
+	// 					html += "    <td class='imageURL'><img src='" + imageURL + "' alt='' /></td>";
+	// 					html += "    <td class='propertyID' style='display:none'>" + $("#propertiesAddID").val() + "</td>";
+	// 					html += "    <td class='name'>" + $("#propertiesAddName").val() + "</td>";
+	// 					html += "    <td class='description'>" + $("#propertiesAddDescription").val() + "</td>";
+	// 					html += "    <td class='address'>" + $("#propertiesAddAddress").val() + "</td>";
+	// 					html += "    <td class='propertyFee'>" + $("#propertiesAddFee").val() + "%</td>";
+	// 					html += "    <td class='minimumNightlyPrice'>$" + $("#propertiesAddPrice").val() + "</td>";
+	// 					html += "</tr>";
+	//
+	// 					$("#properties tbody").append(html);
+	//
+	// 					userPropertyList.push({
+	// 						'propertyID': $("#propertiesAddID").val(),
+	// 						'name': $("#propertiesAddName").val(),
+	// 						'description': $("#propertiesAddDescription").val(),
+	// 						'address': $("#propertiesAddAddress").val(),
+	// 						'minimumNightlyPrice': $("#propertiesAddPrice").val(),
+	// 						'propertyFee': $("#propertiesAddFee").val()
+	// 					});
+	//
+	// 					// Clear inputs
+	// 					$("#propertiesAddID").val('');
+	// 					$("#propertiesAddName").val('');
+	// 					$("#propertiesAddDescription").val('');
+	// 					$("#propertiesAddAddress").val('');
+	// 					$("#propertiesAddPrice").val('');
+	// 					$("#propertiesAddFee").val();
+	//
+	// 					addPropertySubpageEvent();
+	//
+	// 					// Remove image from upload box
+	// 					$("#propertiesDropzone > .dz-preview").remove();
+	// 				} else {
+	// 					displayMessage('error', 'Something went wrong added the property to the current user. The web admin has been notified and will fix the problem as soon as possible.');
+	// 				}
+	// 			}).fail(function (request, textStatus, errorThrown) {
+	// 				//displayMessage('error', "Error: Something went wrong with addproperty AJAX POST");
+	// 			});
+	// 		} else {
+	// 			displayMessage("warning", valid[1]);
+	// 		}
+	// 	}
+	// });
+	//
+	// hideAllContainers();
+	// $("#propertySubpage").hide();
+	// var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+	// if (width <= 600) {
+	// 	$("#propertyMobile").show();
+	// 	$("#propertyTable").hide();
+	// } else {
+	// 	$("#propertyMobile").hide();
+	// 	$("#propertyTable").show();
+	// }
+	// $("div#properties").show();
 }
 
 function propertySubpage() {
