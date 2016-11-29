@@ -10,7 +10,8 @@ html {
   font-size: 16px;
 }
 
-input[type='checkbox'] {
+input[type='checkbox'],
+input[type='radio'] {
   width: initial;
   margin-left: 10px;
 }
@@ -20,7 +21,6 @@ button {
   padding: 5px 40px;
   border: 0;
   font-weight: bold;
-  color: white;
 }
 
 input,
@@ -175,6 +175,16 @@ header > #headerInfoPanel select {
 }
 
 #dashboard main content > div #properties .propertyOverview .addressFirst {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+#dashboard main content > div #requests .requestOverview {
+  width: 100%;
+  font-size: 1rem;
+}
+
+#dashboard main content > div #requests .addressFirst {
   font-weight: bold;
   font-size: 1.1rem;
 }

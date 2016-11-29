@@ -1,3 +1,6 @@
+var propertyArray = [];
+var datePickers;
+
 $(function() {
 	$("#headerDate").html(moment().format("dddd, D MMMM YYYY"));
 
@@ -12,6 +15,9 @@ $(function() {
 						break;
 					case 'maintenance':
 						maintenance();
+						break;
+					case 'add-request':
+						addRequest();
 						break;
 					case 'profile':
 						profile();
@@ -94,19 +100,21 @@ function logout() {
 }
 
 function setSectionHeader(obj) {
+	// Prevents previous content being shown while new content is being created
+	$(".sectionContent").hide();
 	var s = $(".sectionHeader");
 
 	if (obj) {
-		s.find("img").prop('src', obj.img ? 'images/' + obj.img : PLACEHOLDER + '100');
+		s.find("img").prop('src', obj.img ? 'images/' + obj.img : PLACEHOLDER);
 
 		if (obj.title) {
-			s.find("span").html(obj.title);
+			s.find("span").html(obj.title).show();
 		} else {
 			s.find("span").hide();
 		}
 
 		if (obj.button) {
-			s.find("button").html(obj.button.text).click(obj.button.onclick);
+			s.find("button").html(obj.button.text).click(obj.button.onclick).show();
 		} else {
 			s.find("button").hide();
 		}
@@ -114,7 +122,7 @@ function setSectionHeader(obj) {
 		if (obj.select) {
 			s.find("select").html(obj.select.options.reduce(function (html, option) {
 				return html + "<option value='" + option.value + "'>" + option.text + "</option>";
-			}, "")).change(obj.select.onchange);
+			}, "")).change(obj.select.onchange).show();
 		} else {
 			s.find("select").hide();
 		}
@@ -126,7 +134,7 @@ function setSectionHeader(obj) {
 }
 
 function setSectionContent(html) {
-	$(".sectionContent").html(html);
+	$(".sectionContent").html(html).show();
 }
 
 function setHash(hash) {
@@ -199,6 +207,8 @@ function properties() {
 		url: "properties/getproperties.php",
 		vars: getSessionVars(['username']),
 		callback: function (res) {
+			propertyArray = res;
+
 			var html = "";
 			html += "<div id='properties'>";
 			html += "    <table class='propertyOverview'>";
@@ -277,11 +287,11 @@ function maintenance() {
 	$("nav .maintenance").addClass("active");
 
 	setSectionHeader({
-		title: 'Properties',
+		title: 'Maintenance & repairs',
 		button: {
-			text: 'Add property',
+			text: 'Add request',
 			onclick: function () {
-
+				setHash('add-request');
 			}
 		},
 		select: {
@@ -297,11 +307,208 @@ function maintenance() {
 		}
 	});
 
+	get({
+		url: "repairs/getrepairs.php",
+		vars: getSessionVars(['username']),
+		callback: function (res) {
+			var html = "";
+			html += "<div id='requests'>";
+			html += "    <table class='requestOverview'>";
+			html += "        <tr>";
+			html += "            <th>Date</th>";
+			html += "            <th>Address</th>";
+			html += "            <th>Property</th>";
+			html += "            <th>Details</th>";
+			html += "            <th>Status</th>";
+			html += "        </tr>";
+			res.forEach(function (req) {
+				var i = req.address.indexOf(',');
+
+				html += "    <tr>";
+				html += "        <td>";
+				html += "            " + moment(req.incidentDate).format("DD/MM/YYYY");
+				html += "        </td>";
+				html += "        <td>";
+				html += "            <div>";
+				html += "                <span class='addressFirst'>" + req.address.slice(0, i) + "</span><br />";
+				html += "                <span class='addressSecond'>" + req.address.slice(i + 1) + "</span>";
+				html += "            </div>";
+				html += "        </td>";
+				html += "        <td>";
+				html += "            " + req.name;
+				html += "        </td>";
+				html += "        <td>";
+				html += "            " + req.overview;
+				html += "        </td>";
+				html += "        <td>";
+				html += "            " + req.status;
+				html += "        </td>";
+				html += "    </tr>";
+			});
+			html += "    </table>";
+			html += "</div>";
+
+			setSectionContent(html);
+		}
+	});
+}
+
+function addRequest() {
+	setSectionHeader({
+		title: 'Maintenance & repairs > Add new'
+	});
+
 	var html = "";
-	html += "<div id=''>";
+	html += "<div id='add-request'>";
+	html += "    <div class='col-sm-6'>";
+	html += "        <div class='row'>";
+	html += "            <div class='col-sm-6'>";
+	html += "                <label>Property</label>";
+	html += "                <select id='requestProperty'></select>";
+	html += "            </div>";
+	html += "            <div class='col-sm-6'>";
+	html += "                <label>Property Address</label>";
+	html += "                <div id='requestPropertyAddress'></div>";
+	html += "            </div>";
+	html += "        </div>";
+	html += "        <div class='row'>";
+	html += "            <div class='col-sm-6'>";
+	html += "                <label>Report date</label>";
+	html += "                <input type='date' id='requestReportDate' name='requestReportDate' />";
+	html += "            </div>";
+	html += "            <div class='col-sm-6'>";
+	html += "                <label>Date of incident or maintenance</label>";
+	html += "                <input type='date' id='requestIncidentDate' name='requestIncidentDate' />";
+	html += "            </div>";
+	html += "        </div>";
+	html += "        <div class='row'>";
+	html += "            <div class='col-sm-6'>";
+	html += "                <label>Reported By</label>";
+	html += "                <select id='requestReportedBy'>";
+	html += "                    <option value='guest'>Guest</option>";
+	html += "                    <option value='cleaner'>Cleaner</option>";
+	html += "                    <option value='owner'>Owner</option>";
+	html += "                    <option value='hostkeep'>HostKeep</option>";
+	html += "                </select>";
+	html += "            </div>";
+	html += "        </div>";
+	html += "        <div class='row'>";
+	html += "            <label>Overview of incident or maintenance</label>";
+	html += "            <textarea id='requestOverview' rows='4'></textarea>";
+	html += "        </div>";
+	html += "        <div class='row'>";
+	html += "            <label>Action taken</label>";
+	html += "            <textarea id='requestActionTaken' rows='4'></textarea>";
+	html += "        </div>";
+	html += "        <div class='row'>";
+	html += "            <div class='col-sm-6'>";
+	html += "                <label>Cost of issue</label>";
+	html += "                $<input type='number' id='requestCost' />";
+	html += "            </div>";
+	html += "            <div class='col-sm-6'>";
+	html += "                <label>To be paid by</label>";
+	html += "                <select id='requestPaidBy'>";
+	html += "                    <option value='guest'>Guest</option>";
+	html += "                    <option value='owner'>Owner</option>";
+	html += "                    <option value='hostkeep'>HostKeep</option>";
+	html += "                    <option value='airbnb'>Airbnb</option>";
+	html += "                </select>";
+	html += "            </div>";
+	html += "        </div>";
+	html += "        <div class='row'>";
+	html += "            <label>Payment Received</label>";
+	html += "            <form id='requestPaymentReceived'>";
+	html += "                <input type='radio' value='yes' name='paid' /><label>Yes</label><br />";
+	html += "                <input type='radio' value='no' name='paid' checked /><label>No</label>";
+	html += "            </form>";
+	html += "        </div>";
+	html += "        <div class='row'>";
+	html += "            <form id='requestDropzone' class='dropzone' action='" + API_URL + "repairs/uploaddocument.php'>";
+	html += "                <div class='fallback'>";
+	html += "                    <input name='file' type='file' multiple />";
+	html += "                </div>";
+	html += "                <input name='id' type='hidden' />";
+	html += "            </form>";
+	html += "        </div>";
+	html += "        <div class='row'>";
+	html += "            <button id='requestSubmit' onclick='submitNewRequest()'>SUBMIT</button>";
+	html += "        </div>";
+	html += "    </div>";
+	html += "    <div class='col-sm-6'>";
+	html += "        <img src='" + PLACEHOLDER + "' alt='placeholder image' />";
+	html += "    </div>";
 	html += "</div>";
 
 	setSectionContent(html);
+
+	if (propertyArray.length) {
+		$("#requestProperty").html(propertyArray.reduce(function (html, prop) {
+			html += "<option value='" + prop.propertyID + "'>" + prop.name + "</option>";
+		}, ''));
+
+		$("#requestProperty").change();
+	} else {
+		get({
+			url: "properties/getproperties.php",
+			vars: getSessionVars(['username']),
+			callback: function (res) {
+				propertyArray = res;
+				$("#requestProperty").html(propertyArray.reduce(function (html, prop) {
+					return html + "<option value='" + prop.propertyID + "'>" + prop.name + "</option>";
+				}, ''));
+
+				$("#requestProperty").change();
+			}
+		});
+	}
+
+	$('#requestReportDate, #requestIncidentDate').pickadate({
+		format: 'ddd d mmm yyyy',
+		formatSubmit: 'yyyy/mm/dd',
+		hiddenName: true
+	});
+
+	$("#requestProperty").change(function () {
+		$("#requestDropzone [name='id']").val($("#requestProperty").val());
+		$("#requestPropertyAddress").html(propertyArray.reduce(function (address, prop) {
+			return (prop.propertyID === $("#requestProperty").val() ? prop.address : '');
+		}, ''));
+	});
+}
+
+function submitNewRequest() {
+	var filenames = [];
+	var propID = $("#requestProperty").val();
+
+	$(".dz-filename span").each(function () {
+		filenames.push(propID + "." + moment().utc().format("YYYYMMDD") + "." + $(this).text());
+	});
+
+	post({
+		url: 'repairs/addrepair.php',
+		vars: $.extend({}, getSessionVars(['username']), {
+			propertyID: propID,
+			reportDate: $("input[name='requestReportDate']").val(),
+			incidentDate: $("input[name='requestIncidentDate']").val(),
+			reportedBy: $("#requestReportedBy").val(),
+			overview: $("#requestOverview").val(),
+			actionTaken: $("#requestActionTaken").val(),
+			issueCost: $("#requestCost").val(),
+			paidBy: $("#requestPaidBy").val(),
+			paymentReceived: $("#requestPaymentReceived :checked").val(),
+			documentation: JSON.stringify(filenames)
+		}),
+		callback: function (res) {
+			displayMessage('success', 'Repair request successfully created');
+
+			$("#requestReportDate, #requestIncidentDate").pickadate().pickadate('clear');
+			$("#requestOverview").val('');
+			$("#requestActionTaken").val('');
+			$("#requestCost").val('');
+			$(".dz-preview").remove();
+			$(".dropzone.dz-started .dz-message").show();
+		}
+	});
 }
 
 /* ------------------------------------------------------- Profile ---------- */

@@ -1,7 +1,9 @@
 var ADMIN_USERNAME = "hello@hostkeep.com.au";
 var AIRBNB_URL = "https://www.airbnb.com.au/rooms/";
-var PLACEHOLDER = "http://placehold.it/";
+var PLACEHOLDER = "http://placehold.it/100";
 var API_URL = "http://uistaging.owners.hostkeep.com.au/php/";
+var REPAIRS_URL = "http://uistaging.owners.hostkeep.com.au/repairs/";
+var DOCUMENTS_URL = "http://uistaging.owners.hostkeep.com.au/documents/";
 
 // Set toastr notification options
 $(function () {
