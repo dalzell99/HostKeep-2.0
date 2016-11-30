@@ -9,7 +9,7 @@ if (mysqli_connect_errno()) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-$sql = "SELECT r.*, p.*
+$sql = "SELECT r.*, p.name, p.address
 FROM Repairs AS r
 INNER JOIN Properties AS p
 ON r.propertyID = p.propertyID

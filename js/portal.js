@@ -141,6 +141,14 @@ function setHash(hash) {
 	window.location.hash = hash;
 }
 
+function toggleMenu() {
+	var left = ($("main nav").css('left') !== '0px' ? '0' : '-50vw');
+
+	$("main nav").animate({
+		'left': left
+	}, 1000);
+}
+
 /* ------------------------------------------------------- Dashboard -------- */
 
 function dashboard() {
@@ -242,7 +250,7 @@ function properties() {
 				html += "            <span>" + prop.status[0].toUpperCase() + prop.status.slice(1) + "</span>";
 				html += "        </td>";
 				html += "        <td>";
-				html += "            <img class='propertySubpage' src='./images/property_subpage.svg' alt='property subpage thumbnail' />";
+				html += "            <img class='propertySubpage' src='./images/property_subpage.svg' alt='property subpage thumbnail' onclick='propertySubpage(\"" + prop.propertyID + "\")' />";
 				html += "        </td>";
 				html += "    </tr>";
 			});
@@ -278,6 +286,169 @@ function addProperty() {
 	html += "</div>";
 
 	setSectionContent(html);
+}
+
+function propertySubpage(id) {
+	var prop = propertyArray.reduce(function (prop, curr) {
+		return (curr.propertyID === id ? curr : prop);
+	}, false);
+
+	if (prop) {
+		var html = "";
+		html += "<div id='propertySubpage'>";
+		html += "    <table class='nav'>";
+		html += "        <tr>";
+		html += "            <td>General</td>";
+		html += "            <td>Bookings</td>";
+		html += "            <td>Photos</td>";
+		html += "            <td>Links</td>";
+		html += "            <td>Management</td>";
+		html += "            <td>Admin</td>";
+		html += "        </tr>";
+		html += "    </table>";
+		html += propertySubpageGeneral(prop);
+		html += propertySubpageBookings(prop);
+		html += propertySubpagePhotos(prop);
+		html += propertySubpageLinks(prop);
+		html += propertySubpageManagement(prop);
+		html += propertySubpageAdmin(prop);
+		html += "</div>";
+
+		setSectionContent(html);
+
+		$("#propertySubpage .nav td").click(function () {
+			changeSubpageTab($(this).text().toLowerCase());
+		});
+	}
+}
+
+function changeSubpageTab(name) {
+	$("#propertySubpage > div").hide();
+	$("#propertySubpage ." + name).show();
+}
+
+function propertySubpageGeneral(prop) {
+	var html = "";
+
+	html += "<div class='general'>";
+	html += "    <div class='col-sm-7'>";
+	html += "        <div class='col-xs-4'>";
+	html += "            <div class='title'>Property ID</div>";
+	html += "            <div class='value'>" + prop.propertyID + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-8'>";
+	html += "            <div class='title'>Property name</div>";
+	html += "            <div class='value'>" + prop.name + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-12'>";
+	html += "            <div class='title'>Property description</div>";
+	html += "            <div class='value'>" + prop.description + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-12'>";
+	html += "            <div class='title'>Property address</div>";
+	html += "            <div class='value'>" + prop.address + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-6'>";
+	html += "            <div class='title'>Min nightly price</div>";
+	html += "            <span>$</span>";
+	html += "            <div class='value'>" + prop.minimumNightlyPrice + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-6'>";
+	html += "            <div class='title'>Base nightly price</div>";
+	html += "            <span>$</span>";
+	html += "            <div class='value'>" + prop.basePrice + "</div>";
+	html += "        </div>";
+	html += "    </div>";
+	html += "    <div class='col-sm-5'>";
+	html += "        <img src='" + PLACEHOLDER + "' alt='placeholder' />";
+	html += "    </div>";
+	html += "</div>";
+
+	return html;
+}
+
+function propertySubpageBookings(prop) {
+	var html = "";
+
+	html += "<div class='bookings'>";
+	html += "</div>";
+
+	return html;
+}
+
+function propertySubpagePhotos(prop) {
+	var html = "";
+
+	html += "<div class='photos'>";
+	html += "</div>";
+
+	return html;
+}
+
+function propertySubpageLinks(prop) {
+	var html = "";
+
+	html += "<div class='links'>";
+	html += "    <div class='col-sm-7'>";
+	html += "        <div class='col-xs-4'>";
+	html += "            <div class='title'>Airbnb ID</div>";
+	html += "            <div class='value'>" + prop.airbnbID + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-8'>";
+	html += "            <div class='title'>Guest greet guide</div>";
+	html += "            <div class='value'>" + prop.guestGreetURL + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-12'>";
+	html += "            <div class='title'>Self-check-in URL</div>";
+	html += "            <div class='value'>" + prop.selfCheckinURL + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-12'>";
+	html += "            <div class='title'>Cal URL</div>";
+	html += "            <div class='value'>" + prop.icalURL + "</div>";
+	html += "        </div>";
+	html += "    </div>";
+	html += "</div>";
+
+	return html;
+}
+
+function propertySubpageManagement(prop) {
+	var p = (prop.commencementFeeReceived === 'true' ? true : false);
+	var html = "";
+
+	html += "<div class='management'>";
+	html += "    <div class='col-sm-7'>";
+	html += "        <div class='col-xs-12'>";
+	html += "            <div class='title'>Property status</div>";
+	html += "            <div class='value'>" + prop.status + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-6'>";
+	html += "            <div class='title'>Commencement fee</div>";
+	html += "            <span>$</span>";
+	html += "            <div class='value'>" + prop.commencementFee + "</div>";
+	html += "        </div>";
+	html += "        <div class='col-xs-6'>";
+	html += "            <div class='title'>Fee Received?</div>";
+	html += "            <form class='feeReceived'>";
+	html += "                <input type='radio' name='fee' value='yes' " + (p ? 'checked' : '') + ">";
+	html += "                <label>Yes</label>";
+	html += "                <input type='radio' name='fee' value='no' " + (!p ? 'checked' : '') + ">";
+	html += "                <label>No</label>";
+	html += "            </form>";
+	html += "        </div>";
+	html += "    </div>";
+	html += "</div>";
+
+	return html;
+}
+
+function propertySubpageAdmin(prop) {
+	var html = "";
+
+	html += "<div class='admin'>";
+	html += "</div>";
+
+	return html;
 }
 
 /* ------------------------------------------------------- Maintenance ------ */
@@ -464,7 +635,7 @@ function addRequest() {
 
 	$('#requestReportDate, #requestIncidentDate').pickadate({
 		format: 'ddd d mmm yyyy',
-		formatSubmit: 'yyyy/mm/dd',
+		formatSubmit: 'yyyy-mm-dd',
 		hiddenName: true
 	});
 

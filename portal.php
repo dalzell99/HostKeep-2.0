@@ -18,7 +18,8 @@
 				</header>
 
 				<main>
-					<nav class="col-sm-3">
+					<img class='burgerMenu' src='images/menu.svg' alt='menu' onclick='toggleMenu()' />
+					<nav class="col-xs-6 col-sm-3">
 						<table>
 							<tr>
 								<td>
@@ -85,7 +86,7 @@
 							</tr>
 						</table>
 					</nav>
-					<content class="col-sm-9">
+					<content class="col-sm-9 col-xs-12">
 						<div class="col-xs-12">
 							<table class="sectionHeader">
 								<tr>

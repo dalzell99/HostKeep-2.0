@@ -5,6 +5,10 @@ $company-color: #00b7a6
 
 $header-height: 6rem
 
+$sm-breakpoint: 768px
+$md-breakpoint: 992px
+$lg-breakpoint: 1200px
+
 .hidden
 	display: none
 
@@ -137,7 +141,6 @@ header > #headerInfoPanel
 						padding: 0
 						color: $company-color
 
-			// #profile
 			#properties
 				.propertyOverview
 					width: 100%
@@ -145,13 +148,32 @@ header > #headerInfoPanel
 
 					.propertyMap
 						width: 3rem
+						cursor: pointer
 
 					.propertySubpage
 						width: 2rem
+						cursor: pointer
 
 					.addressFirst
 						font-weight: bold
 						font-size: 1.1rem
+
+			#propertySubpage
+				.nav
+					width: 100%
+
+					td
+						cursor: pointer
+
+				.value
+					display: inline-block
+
+				.bookings,
+				.photos,
+				.links,
+				.management,
+				.admin
+					display: none
 
 			#requests
 				.requestOverview
@@ -166,9 +188,29 @@ header > #headerInfoPanel
 			// #directBooking
 			// #admin
 
+	.burgerMenu
+		display: none
+		position: absolute
+		left: 10px
+		top: 105px
+		width: 32px
+		cursor: pointer
+		z-index: 2
+
+		@media (max-width: $sm-breakpoint)
+			display: block
+
 	nav
 		box-shadow: 3px 0 30px 0 $header-background-color
 		height: 100%
+		z-index: 1
+		background-color: white
+		position: static
+
+		@media (max-width: $sm-breakpoint)
+			position: absolute
+			left: -50vw
+			height: calc(100% - #{$header-height})
 
 		&:hover
 			cursor: pointer
@@ -187,20 +229,7 @@ header > #headerInfoPanel
 					padding-top: 1.3em
 					font-size: 1.1em
 					font-weight: bold
-
-					/* Stop text selection */
-					-webkit-touch-callout: none
-					-webkit-user-select: none
-					-khtml-user-select: none
-					-moz-user-select: none
-					-ms-user-select: none
 					user-select: none
-
-					@media (max-width: 1200px)
-						font-size: .85em
-
-					@media (max-width: 768px)
-						font-size: .65em
 
 					&:hover
 						background-color: lighten($header-background-color, 30%)
@@ -212,10 +241,6 @@ header > #headerInfoPanel
 				& .admin
 					display: none
 
-				&:nth-child(5) > div
-					@media (max-width: 489px)
-						padding-top: .7em
-
 		#sidebarAdmin
 			text-align: center
 
@@ -224,6 +249,10 @@ header > #headerInfoPanel
 			bottom: 1rem
 			left: 0
 			border-top: 1px solid rgb(195, 195, 195)
+			width: 25%
+
+			@media (max-width: $sm-breakpoint)
+				width: 100%
 
 			#copyright
 				text-align: center
