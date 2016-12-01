@@ -1,13 +1,4 @@
-$header-text-color: #919395
-$header-background-color: #e5e5e5
-$header-title-color: #686868
-$company-color: #00b7a6
-
-$header-height: 6rem
-
-$sm-breakpoint: 768px
-$md-breakpoint: 992px
-$lg-breakpoint: 1200px
+@import 'global'
 
 .hidden
 	display: none
@@ -49,49 +40,6 @@ p
 label
 	font-weight: initial
 	margin-bottom: initial
-
-header > #headerInfoPanel
-	background-color: $header-background-color
-	color: $header-text-color
-	height: $header-height
-
-	#headerLogoContainer,
-	#headerDropdownContainer,
-	#headerUserInfoContainer
-		height: 6rem
-		width: 100%
-
-	#headerUserInfoContainer
-		text-align: center
-
-	#headerLogo
-		max-height: 5rem
-		max-width: 100%
-
-	#headerTitle
-		color: $header-title-color
-		font-size: 1rem
-
-	#headerUserProfileImage
-		border-radius: 50%
-		width: 4rem
-
-	#headerUsersName
-		display: inline-block
-		border-right: 1px solid black
-		padding: 0 .75rem
-		font-size: 1rem
-		height: 1.8rem
-
-	#headerLogoutButton
-		margin: 0 .75rem
-		padding: .3rem 1.9rem
-
-	select
-		color: initial
-		margin-top: 5px
-		padding: 5px
-		width: 85%
 
 #dashboard main
 	height: calc(100vh - #{$header-height})
@@ -174,6 +122,73 @@ header > #headerInfoPanel
 				.management,
 				.admin
 					display: none
+
+				table#bookingCalendar
+					width: 100%
+
+					th
+						color: black
+						text-align: center
+
+				.reservationCalendar
+					padding: 0
+
+					li.tile
+						width: calc(100% / 7)
+						display: inline-block
+						color: black
+						position: relative
+						float: left
+						border: 1px solid rgba(127, 255, 212, 0.5)
+
+						.date
+							padding: 1.5% 5% 80% 6%
+							text-align: left
+
+						.reservationMarker
+							position: absolute
+							top: 50%
+							left: -1px
+							right: -1px
+							height: 18px
+							background-color: rgb(18, 161, 68)
+
+							&.blockedDate
+								background-color: darkgrey
+
+							&.reservationStartMarker
+								left: 25%
+								border-radius: 10px 0 0 10px
+
+							&.reservationEndMarker
+								right: 85%
+								border-radius: 0 10px 10px 0
+
+							.guestName
+								position: absolute
+								text-align: center
+								z-index: 2
+								color: white
+								white-space: nowrap
+								width: 100%
+								font-weight: bold
+
+							.reservationGuestThumbnail
+								border-radius: 50%
+								position: absolute
+								z-index: 1
+								height: 45px
+								top: -15px
+								left: 3px
+
+								@media (max-width: 550px)
+									height: 40px
+									top: -10px
+
+						.bookingPrices
+							position: absolute
+							bottom: 5px
+							left: 30%
 
 			#requests
 				.requestOverview

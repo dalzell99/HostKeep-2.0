@@ -26,7 +26,7 @@ var currentContractExpiryDate = '';
 
 $(function() {
 	$("#headerDate").html(moment().format("dddd, D MMMM YYYY"));
-	$(".lastReportingMonth").html(moment().format("MMMM"))
+	$(".lastReportingMonth").html(moment().format("MMMM"));
 
 	if (sessionStorage.loggedIn === 'true') {
 		// Change the displayed section based on the url hash
@@ -465,7 +465,7 @@ function properties() {
 	$("nav .active").removeClass("active");
 	$("nav .properties").addClass("active");
 	$("div#properties").show();
-	
+
 	// $("nav .active").removeClass("active");
 	// $("nav .properties").addClass("active");
 	//
@@ -1949,7 +1949,7 @@ function addInfoToCalendar() {
 							click: function () {
 								setDateInput(date);
 							}
-						})
+						});
 					}
 				}
 			});

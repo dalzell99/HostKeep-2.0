@@ -18,7 +18,7 @@ $(function() {
 				} else if (response.substr(0, 9) == 'firsttime') {
 					// If username and password are correct and it's the first time logging in then call setUserInfo and redirect to first-time to set new password
 					setUserInfo(response, 9);
-					window.location = "first-time.php"
+					window.location = "first-time.php";
 				} else if (response == 'retired') {
 					// If the account has been marked as retired display a message
 					displayMessage('error', "This account has been marked as retired. If this is incorrect, please send an email to hello@hostkeep.com.au");
@@ -38,7 +38,7 @@ $(function() {
 		}
 	});
 
-	$("div#headerTitle").text("Login");
+	$("#headerInfoPanel div").get(0).className = 'col-xs-10 col-sm-2';
 });
 
 // Set sessionStorage variables

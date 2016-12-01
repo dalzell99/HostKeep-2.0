@@ -1,3 +1,38 @@
+header > #headerInfoPanel {
+  background-color: #e5e5e5;
+  color: #919395;
+  height: 6rem; }
+  header > #headerInfoPanel #headerLogoContainer,
+  header > #headerInfoPanel #headerDropdownContainer,
+  header > #headerInfoPanel #headerUserInfoContainer {
+    height: 6rem;
+    width: 100%; }
+  header > #headerInfoPanel #headerUserInfoContainer {
+    text-align: center; }
+  header > #headerInfoPanel #headerLogo {
+    max-height: 5rem;
+    max-width: 100%; }
+  header > #headerInfoPanel #headerTitle {
+    color: #686868;
+    font-size: 1rem; }
+  header > #headerInfoPanel #headerUserProfileImage {
+    border-radius: 50%;
+    width: 4rem; }
+  header > #headerInfoPanel #headerUsersName {
+    display: inline-block;
+    border-right: 1px solid black;
+    padding: 0 .75rem;
+    font-size: 1rem;
+    height: 1.8rem; }
+  header > #headerInfoPanel #headerLogoutButton {
+    margin: 0 .75rem;
+    padding: .3rem 1.9rem; }
+  header > #headerInfoPanel select {
+    color: initial;
+    margin-top: 5px;
+    padding: 5px;
+    width: 85%; }
+
 .hidden {
   display: none; }
 
@@ -38,41 +73,6 @@ p {
 label {
   font-weight: initial;
   margin-bottom: initial; }
-
-header > #headerInfoPanel {
-  background-color: #e5e5e5;
-  color: #919395;
-  height: 6rem; }
-  header > #headerInfoPanel #headerLogoContainer,
-  header > #headerInfoPanel #headerDropdownContainer,
-  header > #headerInfoPanel #headerUserInfoContainer {
-    height: 6rem;
-    width: 100%; }
-  header > #headerInfoPanel #headerUserInfoContainer {
-    text-align: center; }
-  header > #headerInfoPanel #headerLogo {
-    max-height: 5rem;
-    max-width: 100%; }
-  header > #headerInfoPanel #headerTitle {
-    color: #686868;
-    font-size: 1rem; }
-  header > #headerInfoPanel #headerUserProfileImage {
-    border-radius: 50%;
-    width: 4rem; }
-  header > #headerInfoPanel #headerUsersName {
-    display: inline-block;
-    border-right: 1px solid black;
-    padding: 0 .75rem;
-    font-size: 1rem;
-    height: 1.8rem; }
-  header > #headerInfoPanel #headerLogoutButton {
-    margin: 0 .75rem;
-    padding: .3rem 1.9rem; }
-  header > #headerInfoPanel select {
-    color: initial;
-    margin-top: 5px;
-    padding: 5px;
-    width: 85%; }
 
 #dashboard main {
   height: calc(100vh - 6rem); }
@@ -133,6 +133,61 @@ header > #headerInfoPanel {
       #dashboard main content > div #propertySubpage .management,
       #dashboard main content > div #propertySubpage .admin {
         display: none; }
+      #dashboard main content > div #propertySubpage table#bookingCalendar {
+        width: 100%; }
+        #dashboard main content > div #propertySubpage table#bookingCalendar th {
+          color: black;
+          text-align: center; }
+      #dashboard main content > div #propertySubpage .reservationCalendar {
+        padding: 0; }
+        #dashboard main content > div #propertySubpage .reservationCalendar li.tile {
+          width: calc(100% / 7);
+          display: inline-block;
+          color: black;
+          position: relative;
+          float: left;
+          border: 1px solid rgba(127, 255, 212, 0.5); }
+          #dashboard main content > div #propertySubpage .reservationCalendar li.tile .date {
+            padding: 1.5% 5% 80% 6%;
+            text-align: left; }
+          #dashboard main content > div #propertySubpage .reservationCalendar li.tile .reservationMarker {
+            position: absolute;
+            top: 50%;
+            left: -1px;
+            right: -1px;
+            height: 18px;
+            background-color: #12a144; }
+            #dashboard main content > div #propertySubpage .reservationCalendar li.tile .reservationMarker.blockedDate {
+              background-color: darkgrey; }
+            #dashboard main content > div #propertySubpage .reservationCalendar li.tile .reservationMarker.reservationStartMarker {
+              left: 25%;
+              border-radius: 10px 0 0 10px; }
+            #dashboard main content > div #propertySubpage .reservationCalendar li.tile .reservationMarker.reservationEndMarker {
+              right: 85%;
+              border-radius: 0 10px 10px 0; }
+            #dashboard main content > div #propertySubpage .reservationCalendar li.tile .reservationMarker .guestName {
+              position: absolute;
+              text-align: center;
+              z-index: 2;
+              color: white;
+              white-space: nowrap;
+              width: 100%;
+              font-weight: bold; }
+            #dashboard main content > div #propertySubpage .reservationCalendar li.tile .reservationMarker .reservationGuestThumbnail {
+              border-radius: 50%;
+              position: absolute;
+              z-index: 1;
+              height: 45px;
+              top: -15px;
+              left: 3px; }
+              @media (max-width: 550px) {
+                #dashboard main content > div #propertySubpage .reservationCalendar li.tile .reservationMarker .reservationGuestThumbnail {
+                  height: 40px;
+                  top: -10px; } }
+          #dashboard main content > div #propertySubpage .reservationCalendar li.tile .bookingPrices {
+            position: absolute;
+            bottom: 5px;
+            left: 30%; }
       #dashboard main content > div #requests .requestOverview {
         width: 100%;
         font-size: 1rem; }

@@ -30,9 +30,21 @@ if (($resultBooking = mysqli_query($con, $sqlBooking)) && ($resultReservation = 
 		$response['reservations'][] = $rowReservation;
 	}
 
-	echo json_encode($response);
+	echo json_encode([
+		'status' => true,
+		'data' => $response
+	]);
 } else {
-	echo "fail. $sqlBooking. $sqlReservation";
+	sendErrorEmail("
+	getreservations.php<br />
+	sql: $sql
+	");
+	echo json_encode([
+		'status' => false,
+		'sqlBooking' => $sqlBooking,
+		'sqlReservation' => $sqlReservation,
+		'message' => 'There was an error getting this users repairs'
+	]);
 }
 
 mysqli_close($con);

@@ -24,6 +24,16 @@ $(function () {
 		"showMethod": "fadeIn",
 		"hideMethod": "fadeOut"
 	};
+
+	// if ('serviceWorker' in navigator) {
+	// 	navigator.serviceWorker.register('sw.js').then(function(registration) {
+	// 		// Registration was successful
+	// 		console.log('ServiceWorker registration successful with scope: ', registration.scope);
+	// 	}).catch(function(err) {
+	// 		// registration failed :(
+	// 		console.log('ServiceWorker registration failed: ', err);
+	// 	});
+	// }
 });
 
 // Display a notification message with bootstrap message types
@@ -42,7 +52,7 @@ function getUrlVars() {
 
 function getSessionVars(keys) {
 	return keys.reduce(function (obj, key) {
-		obj[key] = Base64.decode(sessionStorage[Base64.encode(key)]);
+		obj[key] = getSessionVar(key);
 		return obj;
 	}, {});
 }
@@ -50,14 +60,22 @@ function getSessionVars(keys) {
 function setSessionVars(obj) {
 	for (var key in obj) {
 		if (obj.hasOwnProperty(key)) {
-			sessionStorage[Base64.encode(key)] = Base64.encode(obj[key]);
+			setSessionVar(key, obj[key]);
 		}
 	}
 }
 
+function getSessionVar(key) {
+	return Base64.decode(sessionStorage[Base64.encode(key)]);
+}
+
+function setSessionVar(key, val) {
+	sessionStorage[Base64.encode(key)] = Base64.encode(val);
+}
+
 function removeSessionVars(arr) {
 	arr.forEach(function (key) {
-		sessionStorage.remove(Base64.encode(key));
+		sessionStorage.removeItem(Base64.encode(key));
 	});
 }
 

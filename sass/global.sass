@@ -1,0 +1,53 @@
+$header-text-color: #919395
+$header-background-color: #e5e5e5
+$header-title-color: #686868
+$company-color: #00b7a6
+
+$header-height: 6rem
+
+$sm-breakpoint: 768px
+$md-breakpoint: 992px
+$lg-breakpoint: 1200px
+
+header > #headerInfoPanel
+	background-color: $header-background-color
+	color: $header-text-color
+	height: $header-height
+
+	#headerLogoContainer,
+	#headerDropdownContainer,
+	#headerUserInfoContainer
+		height: 6rem
+		width: 100%
+
+	#headerUserInfoContainer
+		text-align: center
+
+	#headerLogo
+		max-height: 5rem
+		max-width: 100%
+
+	#headerTitle
+		color: $header-title-color
+		font-size: 1rem
+
+	#headerUserProfileImage
+		border-radius: 50%
+		width: 4rem
+
+	#headerUsersName
+		display: inline-block
+		border-right: 1px solid black
+		padding: 0 .75rem
+		font-size: 1rem
+		height: 1.8rem
+
+	#headerLogoutButton
+		margin: 0 .75rem
+		padding: .3rem 1.9rem
+
+	select
+		color: initial
+		margin-top: 5px
+		padding: 5px
+		width: 85%
