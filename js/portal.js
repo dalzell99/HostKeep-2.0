@@ -95,6 +95,8 @@ function changeUser(userInfo) {
 function logout() {
 	removeSessionVars(['loggedIn', 'admin', 'username', 'salutation', 'firstName', 'lastName', 'company', 'phoneNumber', 'mobileNumber', 'postalAddress', 'suburb', 'state', 'postcode', 'country', 'lastModified', 'lastLogin', 'lastLoginIP', 'timeZone']);
 
+	removePersistentVars(['username', 'password']);
+
 	window.location = 'index.php';
 }
 

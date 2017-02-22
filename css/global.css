@@ -1,34 +1,890 @@
+.hidden {
+  display: none;
+}
+
+.col-sm-12 {
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
 header > #headerInfoPanel {
   background-color: #e5e5e5;
   color: #919395;
-  height: 6rem; }
-  header > #headerInfoPanel #headerLogoContainer,
-  header > #headerInfoPanel #headerDropdownContainer,
-  header > #headerInfoPanel #headerUserInfoContainer {
-    height: 6rem;
-    width: 100%; }
-  header > #headerInfoPanel #headerUserInfoContainer {
-    text-align: center; }
-  header > #headerInfoPanel #headerLogo {
-    max-height: 5rem;
-    max-width: 100%; }
-  header > #headerInfoPanel #headerTitle {
-    color: #686868;
-    font-size: 1rem; }
-  header > #headerInfoPanel #headerUserProfileImage {
-    border-radius: 50%;
-    width: 4rem; }
-  header > #headerInfoPanel #headerUsersName {
-    display: inline-block;
-    border-right: 1px solid black;
-    padding: 0 .75rem;
-    font-size: 1rem;
-    height: 1.8rem; }
-  header > #headerInfoPanel #headerLogoutButton {
-    margin: 0 .75rem;
-    padding: .3rem 1.9rem; }
-  header > #headerInfoPanel select {
-    color: initial;
-    margin-top: 5px;
-    padding: 5px;
-    width: 85%; }
+  height: 6rem;
+}
+
+header > #headerInfoPanel #headerLogoContainer,
+header > #headerInfoPanel #headerDropdownContainer,
+header > #headerInfoPanel #headerUserInfoContainer {
+  height: 6rem;
+  width: 100%;
+}
+
+header > #headerInfoPanel #headerUserInfoContainer {
+  text-align: center;
+}
+
+header > #headerInfoPanel #headerLogo {
+  max-height: 5rem;
+  max-width: 100%;
+}
+
+header > #headerInfoPanel #headerTitle {
+  color: #686868;
+  font-size: 1rem;
+}
+
+header > #headerInfoPanel #headerUserProfileImage {
+  border-radius: 50%;
+  width: 4rem;
+}
+
+header > #headerInfoPanel #headerUsersName {
+  display: inline-block;
+  border-right: 1px solid black;
+  padding: 0 .75rem;
+  font-size: 1rem;
+  height: 1.8rem;
+}
+
+header > #headerInfoPanel #headerLogoutButton {
+  margin: 0 .75rem;
+  padding: .3rem 1.9rem;
+}
+
+header > #headerInfoPanel select {
+  color: initial;
+  margin-top: 5px;
+  padding: 5px;
+  width: 85%;
+}
+
+#dashboard main {
+  height: calc(100vh - 6rem);
+}
+
+#dashboard main content {
+  height: 100%;
+  overflow: auto;
+}
+
+#dashboard main content > div {
+  display: none;
+  margin-top: 10px;
+  padding: 0 2rem;
+}
+
+#dashboard main content > div#dashboard h4 {
+  margin-bottom: 0;
+}
+
+#dashboard main content > div#dashboard #newsUpdates,
+#dashboard main content > div#dashboard #monthlyReport {
+  height: 8rem;
+  border: 1px solid black;
+  margin: .75rem;
+  overflow: auto;
+}
+
+#dashboard main content > div#profile .profileSeparator {
+  height: 30px;
+}
+
+#dashboard main content > div#profile .profileSeparator div {
+  border-bottom: 1px solid lightgrey;
+}
+
+#dashboard main content > div#profile table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#dashboard main content > div#profile table th:not(:nth-child(4)),
+#dashboard main content > div#profile table td:not(:nth-child(4)) {
+  width: 23%;
+}
+
+@media (max-width: 992px) {
+  #dashboard main content > div#profile table th:not(:nth-child(4)),
+  #dashboard main content > div#profile table td:not(:nth-child(4)) {
+    width: 33.33%;
+  }
+}
+
+#dashboard main content > div#profile table th:nth-child(4),
+#dashboard main content > div#profile table td:nth-child(4) {
+  width: 31%;
+}
+
+@media (max-width: 992px) {
+  #dashboard main content > div#profile table th:nth-child(4),
+  #dashboard main content > div#profile table td:nth-child(4) {
+    display: none;
+  }
+}
+
+#dashboard main content > div#properties #propertiesAdd,
+#dashboard main content > div#properties #propertiesAddNewProperty,
+#dashboard main content > div#properties #propertyMobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  #dashboard main content > div#properties #propertyMobile {
+    display: block;
+  }
+  #dashboard main content > div#properties #propertyTable {
+    display: none;
+  }
+}
+
+#dashboard main content > div#properties table#propertyTable {
+  width: 100%;
+}
+
+#dashboard main content > div#properties table#propertyTable th {
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+#dashboard main content > div#properties table#propertyTable th,
+#dashboard main content > div#properties table#propertyTable td {
+  padding: 5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+#dashboard main content > div#properties table#propertyTable th:nth-child(1),
+#dashboard main content > div#properties table#propertyTable td:nth-child(1) {
+  width: 18%;
+}
+
+#dashboard main content > div#properties table#propertyTable th:nth-child(1) img,
+#dashboard main content > div#properties table#propertyTable td:nth-child(1) img {
+  width: 100%;
+}
+
+#dashboard main content > div#properties table#propertyTable th:nth-child(3),
+#dashboard main content > div#properties table#propertyTable td:nth-child(3) {
+  width: 12.5%;
+}
+
+#dashboard main content > div#properties table#propertyTable th:nth-child(4),
+#dashboard main content > div#properties table#propertyTable td:nth-child(4) {
+  width: 20%;
+}
+
+#dashboard main content > div#properties table#propertyTable th:nth-child(5),
+#dashboard main content > div#properties table#propertyTable td:nth-child(5) {
+  width: 40%;
+}
+
+#dashboard main content > div#properties table#propertyTable th:nth-child(7) > div,
+#dashboard main content > div#properties table#propertyTable td:nth-child(7) > div {
+  border: 1px solid #00b7a6;
+}
+
+#dashboard main content > div#properties table#propertyTable img {
+  width: 200px;
+}
+
+#dashboard main content > div#properties table#propertyMobile {
+  width: 100%;
+  font-size: .8em;
+}
+
+#dashboard main content > div#properties table#propertyMobile tr:not(:first-child) {
+  border-top: 1px solid lightgrey;
+}
+
+#dashboard main content > div#properties table#propertyMobile td {
+  padding: 15px 5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+#dashboard main content > div#properties table#propertyMobile td:nth-child(1) {
+  width: 40%;
+}
+
+#dashboard main content > div#properties table#propertyMobile td:nth-child(1) img {
+  width: 100%;
+}
+
+#dashboard main content > div#properties table#propertyMobile td:nth-child(3) {
+  width: 60%;
+}
+
+#dashboard main content > div#properties table#propertyMobile td:nth-child(3) > div:nth-child(2) {
+  margin-bottom: 1em;
+}
+
+#dashboard main content > div#properties table#propertyMobile td:nth-child(3) > div:nth-child(3) div {
+  border: 1px solid #00b7a6;
+  width: 20%;
+  display: inline-block;
+}
+
+#dashboard main content > div#properties #propertySubpage .calendar-container {
+  position: relative;
+  padding-bottom: 100%;
+  height: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 992px) {
+  #dashboard main content > div#properties #propertySubpage .calendar-container {
+    padding-bottom: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  #dashboard main content > div#properties #propertySubpage .calendar-container {
+    padding-bottom: 75%;
+  }
+}
+
+@media (max-width: 650px) {
+  #dashboard main content > div#properties #propertySubpage .calendar-container {
+    padding-bottom: 75%;
+  }
+}
+
+#dashboard main content > div#properties #propertySubpage .calendar-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#dashboard main content > div#properties #propertySubpage img.propertyImage {
+  width: 100%;
+  cursor: pointer;
+}
+
+#dashboard main content > div#properties #propertySubpage img.airbnbButtonImage, #dashboard main content > div#properties #propertySubpage img.makeBookingButtonImage {
+  margin-right: 5px;
+  width: 24px;
+}
+
+#dashboard main content > div#properties #propertySubpage .propertySubpageSeparator {
+  height: 2px;
+  border-bottom: 1px solid lightgrey;
+}
+
+#dashboard main content > div#properties #propertySubpage .propertySubpageLinkButtons {
+  width: 49%;
+  padding: 5px 0;
+}
+
+#dashboard main content > div#properties #propertySubpage #propertySubpageMakeBookingButton {
+  background-color: #668cd9;
+}
+
+#dashboard main content > div#properties #propertySubpage .row {
+  border-bottom: 1px solid lightgrey;
+}
+
+#dashboard main content > div#properties #propertySubpage .row:last-child {
+  border: 0;
+}
+
+#dashboard main content > div#properties #propertySubpage .row > div {
+  margin: 15px 0;
+}
+
+#dashboard main content > div#properties #propertySubpage #propertySubpagePropertyStatus {
+  width: 120px;
+}
+
+#dashboard main content > div#properties #propertySubpage #propertySubpageCommencementFeeReceivedYes,
+#dashboard main content > div#properties #propertySubpage #propertySubpageCommencementFeeReceivedNo {
+  width: 30px;
+}
+
+#dashboard main content > div#properties #propertySubpage #infoContainer table td:first-child {
+  width: 130px;
+}
+
+#dashboard main content > div#properties #propertySubpage table {
+  width: 100%;
+}
+
+#dashboard main content > div#properties #propertySubpage table td, #dashboard main content > div#properties #propertySubpage table th {
+  padding: 5px 0;
+}
+
+#dashboard main content > div#properties #propertySubpage table#propertySubpageImageAndButton td {
+  text-align: center;
+  color: white;
+}
+
+#dashboard main content > div#properties #propertySubpage table#bookingCalendar th {
+  color: black;
+  text-align: center;
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar {
+  padding: 0;
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile {
+  width: calc(100% / 7);
+  display: inline-block;
+  color: black;
+  position: relative;
+  float: left;
+  border: 1px solid rgba(127, 255, 212, 0.5);
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile .date {
+  padding: 1.5% 5% 80% 6%;
+  text-align: left;
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile .reservationMarker {
+  position: absolute;
+  top: 50%;
+  left: -1px;
+  right: -1px;
+  height: 18px;
+  background-color: #12a144;
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile .reservationMarker.blockedDate {
+  background-color: darkgrey;
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile .reservationMarker.reservationStartMarker {
+  left: 25%;
+  border-radius: 10px 0 0 10px;
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile .reservationMarker.reservationEndMarker {
+  right: 85%;
+  border-radius: 0 10px 10px 0;
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile .reservationMarker .guestName {
+  position: absolute;
+  text-align: center;
+  z-index: 2;
+  color: white;
+  white-space: nowrap;
+  width: 100%;
+  font-weight: bold;
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile .reservationMarker .reservationGuestThumbnail {
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  height: 45px;
+  top: -15px;
+  left: 3px;
+}
+
+@media (max-width: 550px) {
+  #dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile .reservationMarker .reservationGuestThumbnail {
+    height: 40px;
+    top: -10px;
+  }
+}
+
+#dashboard main content > div#properties #propertySubpage table .reservationCalendar li.tile .bookingPrices {
+  position: absolute;
+  bottom: 5px;
+  left: 30%;
+}
+
+#dashboard main content > div#properties #propertySubpage table div[contenteditable='true'] {
+  display: inline-block;
+  width: 70px;
+}
+
+#dashboard main content > div#properties #propertySubpage table [contenteditable='true'] {
+  padding-left: 2px;
+  border: 1px solid #00b7a6;
+}
+
+#dashboard main content > div#properties #propertySubpage iframe .nav-table td:nth-child(5), #dashboard main content > div#properties #propertySubpage iframe .nav-table td:nth-child(6), #dashboard main content > div#properties #propertySubpage iframe .nav-table td.calendar-nav,
+#dashboard main content > div#properties #propertySubpage iframe .nav-table td.date-nav-buttons .today-button {
+  display: none;
+}
+
+#dashboard main content > div#documents #documentsAdd,
+#dashboard main content > div#documents #documentsAddNewDocument,
+#dashboard main content > div#documents #documentsAddFilename {
+  display: none;
+}
+
+#dashboard main content > div#documents #orText {
+  text-align: left;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#dashboard main content > div#documents .nav.nav-tabs {
+  margin-top: 20px;
+}
+
+#dashboard main content > div#documents table {
+  width: 100%;
+}
+
+#dashboard main content > div#documents table th {
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+#dashboard main content > div#documents table th,
+#dashboard main content > div#documents table td {
+  padding: 5px;
+  text-align: left;
+}
+
+#dashboard main content > div#documents table th:nth-child(1),
+#dashboard main content > div#documents table td:nth-child(1) {
+  width: 26%;
+}
+
+#dashboard main content > div#documents table th:nth-child(2), #dashboard main content > div#documents table th:nth-child(3),
+#dashboard main content > div#documents table td:nth-child(2),
+#dashboard main content > div#documents table td:nth-child(3) {
+  width: 8%;
+}
+
+#dashboard main content > div#documents table th:nth-child(4), #dashboard main content > div#documents table th:nth-child(5),
+#dashboard main content > div#documents table td:nth-child(4),
+#dashboard main content > div#documents table td:nth-child(5) {
+  width: 10%;
+  text-align: left;
+}
+
+#dashboard main content > div#documents table th:nth-child(4) img, #dashboard main content > div#documents table th:nth-child(5) img,
+#dashboard main content > div#documents table td:nth-child(4) img,
+#dashboard main content > div#documents table td:nth-child(5) img {
+  cursor: pointer;
+}
+
+#dashboard main content > div#documents table th:nth-child(6),
+#dashboard main content > div#documents table td:nth-child(6) {
+  width: 10%;
+}
+
+@media (max-width: 992px) {
+  #dashboard main content > div#documents table th:nth-child(6),
+  #dashboard main content > div#documents table td:nth-child(6) {
+    display: none;
+  }
+}
+
+#dashboard main content > div#documents table td:nth-child(1) div {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#dashboard main content > div#documents table tbody tr:not(:last-child) {
+  border-bottom: 1px solid lightgrey;
+}
+
+#dashboard main content > div#directBooking .bookingSeparator {
+  height: 15px;
+}
+
+#dashboard main content > div#directBooking .bookingSeparator div {
+  border-bottom: 1px solid lightgrey;
+  margin-top: 10px;
+}
+
+#dashboard main content > div#directBooking #directBookingDivider {
+  border-bottom: 3px solid #00b7a6;
+  height: 3px;
+  margin: 20px 0;
+}
+
+#dashboard main content > div#directBooking #directBookingAddButton {
+  margin-left: 5px;
+}
+
+#dashboard main content > div#directBooking #directBookingAddNewBooking > table {
+  width: 100%;
+}
+
+#dashboard main content > div#directBooking #directBookingAddNewBooking > table p {
+  margin: 8px 0;
+}
+
+#dashboard main content > div#directBooking #directBookingAddNewBooking > table input[type="radio"] {
+  width: initial;
+}
+
+#dashboard main content > div#directBooking #directBookingAddNewBooking > table #directBookingNightlyRate {
+  width: 30%;
+}
+
+#dashboard main content > div#directBooking #directBookingAddNewBooking > table > tbody > tr > th:not(:nth-child(3)),
+#dashboard main content > div#directBooking #directBookingAddNewBooking > table > tbody > tr > td:not(:nth-child(3)) {
+  width: 30%;
+}
+
+@media (max-width: 992px) {
+  #dashboard main content > div#directBooking #directBookingAddNewBooking > table > tbody > tr > th:not(:nth-child(3)),
+  #dashboard main content > div#directBooking #directBookingAddNewBooking > table > tbody > tr > td:not(:nth-child(3)) {
+    width: 50%;
+  }
+}
+
+#dashboard main content > div#directBooking #directBookingAddNewBooking > table > tbody > tr > th:nth-child(3),
+#dashboard main content > div#directBooking #directBookingAddNewBooking > table > tbody > tr > td:nth-child(3) {
+  width: 40%;
+}
+
+@media (max-width: 992px) {
+  #dashboard main content > div#directBooking #directBookingAddNewBooking > table > tbody > tr > th:nth-child(3),
+  #dashboard main content > div#directBooking #directBookingAddNewBooking > table > tbody > tr > td:nth-child(3) {
+    display: none;
+  }
+}
+
+#dashboard main content > div#directBooking table.picker__table th {
+  text-align: center;
+}
+
+#dashboard main content > div#directBooking table#bookingTable {
+  width: 100%;
+}
+
+#dashboard main content > div#directBooking table#bookingTable th {
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+#dashboard main content > div#directBooking table#bookingTable th,
+#dashboard main content > div#directBooking table#bookingTable td {
+  padding: 5px;
+  text-align: left;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer {
+  display: none;
+  position: fixed;
+  width: 70%;
+  height: 80%;
+  left: 15%;
+  top: 10%;
+  background-color: white;
+  border: 1px solid black;
+}
+
+@media (max-width: 768px) {
+  #dashboard main content > div#directBooking #directBookingCalendarContainer {
+    width: 90%;
+    left: 5%;
+  }
+}
+
+@media (max-width: 550px) {
+  #dashboard main content > div#directBooking #directBookingCalendarContainer {
+    width: 100%;
+    left: 0;
+  }
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer .closeIcon {
+  position: absolute;
+  right: 20px;
+  font-size: 2.5em;
+  cursor: pointer;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer #bookingCalendar {
+  width: 100%;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer #bookingCalendar th {
+  text-align: center;
+  font-size: 2em;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer .reservationCalendar {
+  margin-left: -30px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile {
+  width: calc(100% / 7);
+  display: inline-block;
+  color: black;
+  position: relative;
+  float: left;
+  border: 1px solid rgba(127, 255, 212, 0.5);
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile.dateContainer {
+  height: 11vh;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .date {
+  padding: 1.5% 5% 80% 6%;
+  text-align: left;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .reservationMarker {
+  position: absolute;
+  top: 50%;
+  left: -1px;
+  right: -1px;
+  height: 18px;
+  background-color: #12a144;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .reservationMarker.blockedDate {
+  background-color: darkgrey;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .reservationMarker.reservationStartMarker {
+  left: 25%;
+  border-radius: 10px 0 0 10px;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .reservationMarker.reservationEndMarker {
+  right: 85%;
+  border-radius: 0 10px 10px 0;
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .reservationMarker .guestName {
+  position: absolute;
+  text-align: center;
+  z-index: 2;
+  color: white;
+  white-space: nowrap;
+  width: 100%;
+  font-weight: bold;
+}
+
+@media (max-width: 550px) {
+  #dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .reservationMarker .guestName {
+    font-size: .8em;
+  }
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .reservationMarker .reservationGuestThumbnail {
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  height: 45px;
+  top: -15px;
+  left: 3px;
+}
+
+@media (max-width: 550px) {
+  #dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .reservationMarker .reservationGuestThumbnail {
+    height: 35px;
+    top: -10px;
+  }
+}
+
+#dashboard main content > div#directBooking #directBookingCalendarContainer li.tile .bookingPrices {
+  position: absolute;
+  bottom: 5px;
+  left: 30%;
+}
+
+#dashboard main content > div#admin button {
+  margin-top: 10px;
+}
+
+#dashboard main content > div#admin .usersLabel {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+#dashboard main content > div#admin #adminContractExpiryEmailTimeTable {
+  margin-bottom: 20px;
+}
+
+#dashboard main content > div#admin #adminContractExpiryEmailTimeTable input {
+  width: inherit;
+}
+
+#dashboard main content > div#admin table#userTable {
+  width: 100%;
+}
+
+#dashboard main content > div#admin table#userTable th {
+  font-size: 0.9em;
+}
+
+#dashboard main content > div#admin table#userTable th,
+#dashboard main content > div#admin table#userTable td {
+  padding: 5px;
+  border-top: 1px solid teal;
+}
+
+#dashboard main content > div#admin table#userTable th:nth-child(6), #dashboard main content > div#admin table#userTable th:nth-child(7),
+#dashboard main content > div#admin table#userTable td:nth-child(6),
+#dashboard main content > div#admin table#userTable td:nth-child(7) {
+  text-align: left;
+}
+
+#dashboard main content > div#admin table#userTable img.sendWelcomeEmail {
+  height: 24px;
+  cursor: pointer;
+}
+
+#dashboard main content > div#admin table#userTable img.deleteCustomer {
+  height: 22px;
+  cursor: pointer;
+}
+
+#dashboard main nav {
+  box-shadow: 3px 0 30px 0 #e5e5e5;
+  height: 100%;
+}
+
+#dashboard main nav:hover {
+  cursor: pointer;
+}
+
+#dashboard main nav table {
+  width: 100%;
+}
+
+#dashboard main nav table td {
+  width: 20%;
+  padding: 0;
+}
+
+#dashboard main nav table td div {
+  margin: 3%;
+  height: 4em;
+  text-align: center;
+  padding-top: 1.3em;
+  font-size: 1.1em;
+  font-weight: bold;
+  /* Stop text selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (max-width: 1200px) {
+  #dashboard main nav table td div {
+    font-size: .85em;
+  }
+}
+
+@media (max-width: 768px) {
+  #dashboard main nav table td div {
+    font-size: .65em;
+  }
+}
+
+#dashboard main nav table td div:hover {
+  background-color: white;
+}
+
+#dashboard main nav table td div.active {
+  background-color: #00b7a6;
+  color: #fff;
+}
+
+#dashboard main nav table td .admin {
+  display: none;
+}
+
+@media (max-width: 489px) {
+  #dashboard main nav table td:nth-child(5) > div {
+    padding-top: .7em;
+  }
+}
+
+#dashboard main nav #sidebarAdmin {
+  text-align: center;
+}
+
+#dashboard main nav #sidebarFooter {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  border-top: 1px solid #c3c3c3;
+}
+
+#dashboard main nav #sidebarFooter #copyright {
+  text-align: center;
+  height: 2rem;
+  font-size: .9rem;
+}
+
+#dashboard main nav #sidebarFooter .footerLink {
+  text-align: center;
+  border-right: 1px solid #e5e5e5;
+  height: 1.9rem;
+}
+
+#dashboard main nav #sidebarFooter .footerLink:last-of-type {
+  border-right: 0;
+}
+
+input[type='checkbox'] {
+  width: initial;
+  margin-left: 10px;
+}
+
+button {
+  background-color: #00b7a6;
+  padding: 5px 40px;
+  border: 0;
+  font-weight: bold;
+}
+
+input,
+select,
+textarea {
+  margin: 2px;
+  border: 1px solid #00b7a6;
+  width: 100%;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: #EBEBE4;
+}
+
+td {
+  padding: 0 5px;
+}
+
+p {
+  margin: 20px 0;
+}
+
+label {
+  font-weight: initial;
+  margin-bottom: initial;
+}
+
+.fa {
+  display: none;
+}
+
+.fa.fa-check {
+  color: #0F0;
+}
+
+.fa.fa-times {
+  color: #F00;
+}
+
+.fa.fa-15x {
+  font-size: 1.5em;
+}

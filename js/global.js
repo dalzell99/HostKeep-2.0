@@ -66,16 +66,53 @@ function setSessionVars(obj) {
 }
 
 function getSessionVar(key) {
-	return Base64.decode(sessionStorage[Base64.encode(key)]);
+	try {
+		return Base64.decode(sessionStorage[Base64.encode(key)]);
+	} catch (e) {
+		return false;
+	}
 }
 
 function setSessionVar(key, val) {
 	sessionStorage[Base64.encode(key)] = Base64.encode(val);
 }
 
+function getPersistentVars(keys) {
+	return keys.reduce(function (obj, key) {
+		obj[key] = getPersistentVar(key);
+		return obj;
+	}, {});
+}
+
+function setPersistentVars(obj) {
+	for (var key in obj) {
+		if (obj.hasOwnProperty(key)) {
+			setPersistentVar(key, obj[key]);
+		}
+	}
+}
+
+function getPersistentVar(key) {
+	try {
+		return Base64.decode(localStorage[Base64.encode(key)]);
+	} catch (e) {
+		return false;
+	}
+}
+
+function setPersistentVar(key, val) {
+	localStorage[Base64.encode(key)] = Base64.encode(val);
+}
+
 function removeSessionVars(arr) {
 	arr.forEach(function (key) {
 		sessionStorage.removeItem(Base64.encode(key));
+	});
+}
+
+function removePersistentVars(arr) {
+	arr.forEach(function (key) {
+		localStorage.removeItem(Base64.encode(key));
 	});
 }
 

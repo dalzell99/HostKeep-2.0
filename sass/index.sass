@@ -1,3 +1,77 @@
-#headerUserInfoContainer,
-#headerDropdownContainer
-	display: none
+@import 'global'
+
+$header-color: #919395
+
+header
+	height: 15rem
+
+	#headerLogo
+		height: 6rem
+		margin: .5rem
+
+	#headerTitle
+		color: $header-color
+		font-size: 1.4rem
+
+main
+	.title
+		color: $header-color
+		font-size: 2rem
+		text-align: center
+
+	.checkList
+		margin: .5rem
+
+	.listItem
+		color: $header-color
+		font-size: 1rem
+		margin: 3rem 2rem
+
+		span
+			font-size: 1.5rem
+
+		img
+			width: 2rem
+			margin-right: 1rem
+
+	.header
+		color: $header-color
+		font-size: 2.5rem
+
+	.subheader
+		color: $header-color
+		font-size: 1.7rem
+		display: block
+		margin-bottom: 2rem
+
+	.loginForm
+		.inputLabel
+			font-weight: 900
+
+		input[type='text'],
+		input[type='password']
+			border-radius: 2px
+			border: 1px solid #919395
+			width: 200px
+			padding: .5rem
+
+		input[type='checkbox']
+			border-radius: 0
+			border-color: $header-color
+
+		td
+			padding-bottom: .7rem
+
+	.loginButton
+		background-color: $header-color
+		border: 1px solid $header-color
+		padding: .75rem 3.5rem
+		color: white
+		border-radius: 3px
+		margin-left: 1rem
+
+	.registerButton
+		background-color: white
+		border: 1px solid $header-color
+		padding: .75rem 2.5rem
+		border-radius: 3px
